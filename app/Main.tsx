@@ -1,5 +1,6 @@
 import Link from '@/components/Link'
 import Tag from '@/components/Tag'
+import home from '@/data/site/home.json'
 import siteMetadata from '@/data/siteMetadata'
 import { formatDate } from 'pliny/utils/formatDate'
 import NewsletterForm from 'pliny/ui/NewsletterForm'
@@ -13,14 +14,13 @@ export default function Home({ posts }) {
         <div className="grid gap-8 pt-8 pb-10 md:grid-cols-[1.2fr_0.8fr] md:items-end md:pt-12">
           <div className="space-y-5">
             <p className="text-primary-600 dark:text-primary-400 font-mono text-sm font-semibold">
-              morgenzhou.com
+              {home.eyebrow}
             </p>
             <h1 className="max-w-3xl text-4xl leading-tight font-extrabold text-gray-950 sm:text-5xl md:text-6xl dark:text-gray-50">
-              Notes for building with sharper tools.
+              {home.title}
             </h1>
             <p className="max-w-2xl text-lg leading-8 text-gray-600 dark:text-gray-300">
-              A modern notebook on AI, products, mobility, and web systems. Written in MDX, deployed
-              on Cloudflare, kept close to the code.
+              {home.description}
             </p>
           </div>
           <div className="rounded-lg border border-gray-200 bg-gray-50 p-5 font-mono text-sm text-gray-600 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300">
@@ -29,12 +29,12 @@ export default function Home({ posts }) {
               <span className="h-3 w-3 rounded-full bg-yellow-400" />
               <span className="h-3 w-3 rounded-full bg-green-400" />
             </div>
-            <p className="text-gray-400">stack</p>
-            <p>Next.js / Tailwind / MDX</p>
-            <p className="mt-3 text-gray-400">host</p>
-            <p>Cloudflare Pages</p>
-            <p className="mt-3 text-gray-400">mode</p>
-            <p>write, ship, learn</p>
+            <p className="text-gray-400">{home.stackLabel}</p>
+            <p>{home.stackValue}</p>
+            <p className="mt-3 text-gray-400">{home.hostLabel}</p>
+            <p>{home.hostValue}</p>
+            <p className="mt-3 text-gray-400">{home.modeLabel}</p>
+            <p>{home.modeValue}</p>
           </div>
         </div>
         <div className="space-y-2 pt-8 pb-4 md:space-y-5">

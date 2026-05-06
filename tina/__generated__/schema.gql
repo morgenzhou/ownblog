@@ -54,6 +54,8 @@ type Query {
   collections: [Collection!]!
   node(id: String): Node!
   document(collection: String, relativePath: String): DocumentNode!
+  site(relativePath: String): Site!
+  siteConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: SiteFilter): SiteConnection!
   post(relativePath: String): Post!
   postConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PostFilter): PostConnection!
   author(relativePath: String): Author!
@@ -61,6 +63,7 @@ type Query {
 }
 
 input DocumentFilter {
+  site: SiteFilter
   post: PostFilter
   author: AuthorFilter
 }
@@ -88,7 +91,52 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Post | Author | Folder
+union DocumentNode = Site | Post | Author | Folder
+
+type Site implements Node & Document {
+  eyebrow: String
+  title: String
+  description: String
+  stackLabel: String
+  stackValue: String
+  hostLabel: String
+  hostValue: String
+  modeLabel: String
+  modeValue: String
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input StringFilter {
+  startsWith: String
+  eq: String
+  exists: Boolean
+  in: [String]
+}
+
+input SiteFilter {
+  eyebrow: StringFilter
+  title: StringFilter
+  description: StringFilter
+  stackLabel: StringFilter
+  stackValue: StringFilter
+  hostLabel: StringFilter
+  hostValue: StringFilter
+  modeLabel: StringFilter
+  modeValue: StringFilter
+}
+
+type SiteConnectionEdges {
+  cursor: String!
+  node: Site
+}
+
+type SiteConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [SiteConnectionEdges]
+}
 
 type Post implements Node & Document {
   title: String!
@@ -102,13 +150,6 @@ type Post implements Node & Document {
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
-}
-
-input StringFilter {
-  startsWith: String
-  eq: String
-  exists: Boolean
-  in: [String]
 }
 
 input DatetimeFilter {
@@ -199,6 +240,8 @@ type Mutation {
   deleteDocument(collection: String, relativePath: String!): DocumentNode!
   createDocument(collection: String, relativePath: String!, params: DocumentMutation!): DocumentNode!
   createFolder(collection: String, relativePath: String!): DocumentNode!
+  updateSite(relativePath: String!, params: SiteMutation!): Site!
+  createSite(relativePath: String!, params: SiteMutation!): Site!
   updatePost(relativePath: String!, params: PostMutation!): Post!
   createPost(relativePath: String!, params: PostMutation!): Post!
   updateAuthor(relativePath: String!, params: AuthorMutation!): Author!
@@ -206,14 +249,28 @@ type Mutation {
 }
 
 input DocumentUpdateMutation {
+  site: SiteMutation
   post: PostMutation
   author: AuthorMutation
   relativePath: String
 }
 
 input DocumentMutation {
+  site: SiteMutation
   post: PostMutation
   author: AuthorMutation
+}
+
+input SiteMutation {
+  eyebrow: String
+  title: String
+  description: String
+  stackLabel: String
+  stackValue: String
+  hostLabel: String
+  hostValue: String
+  modeLabel: String
+  modeValue: String
 }
 
 input PostMutation {

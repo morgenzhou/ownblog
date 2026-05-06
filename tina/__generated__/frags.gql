@@ -1,3 +1,16 @@
+fragment SiteParts on Site {
+  __typename
+  eyebrow
+  title
+  description
+  stackLabel
+  stackValue
+  hostLabel
+  hostValue
+  modeLabel
+  modeValue
+}
+
 fragment PostParts on Post {
   __typename
   title

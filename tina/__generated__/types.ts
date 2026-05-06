@@ -82,6 +82,8 @@ export type Query = {
   collections: Array<Collection>;
   node: Node;
   document: DocumentNode;
+  site: Site;
+  siteConnection: SiteConnection;
   post: Post;
   postConnection: PostConnection;
   author: Author;
@@ -107,6 +109,21 @@ export type QueryNodeArgs = {
 export type QueryDocumentArgs = {
   collection?: InputMaybe<Scalars['String']['input']>;
   relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QuerySiteArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QuerySiteConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<SiteFilter>;
 };
 
 
@@ -140,6 +157,7 @@ export type QueryAuthorConnectionArgs = {
 };
 
 export type DocumentFilter = {
+  site?: InputMaybe<SiteFilter>;
   post?: InputMaybe<PostFilter>;
   author?: InputMaybe<AuthorFilter>;
 };
@@ -181,7 +199,55 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = Post | Author | Folder;
+export type DocumentNode = Site | Post | Author | Folder;
+
+export type Site = Node & Document & {
+  __typename?: 'Site';
+  eyebrow?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  stackLabel?: Maybe<Scalars['String']['output']>;
+  stackValue?: Maybe<Scalars['String']['output']>;
+  hostLabel?: Maybe<Scalars['String']['output']>;
+  hostValue?: Maybe<Scalars['String']['output']>;
+  modeLabel?: Maybe<Scalars['String']['output']>;
+  modeValue?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type StringFilter = {
+  startsWith?: InputMaybe<Scalars['String']['input']>;
+  eq?: InputMaybe<Scalars['String']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type SiteFilter = {
+  eyebrow?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  stackLabel?: InputMaybe<StringFilter>;
+  stackValue?: InputMaybe<StringFilter>;
+  hostLabel?: InputMaybe<StringFilter>;
+  hostValue?: InputMaybe<StringFilter>;
+  modeLabel?: InputMaybe<StringFilter>;
+  modeValue?: InputMaybe<StringFilter>;
+};
+
+export type SiteConnectionEdges = {
+  __typename?: 'SiteConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Site>;
+};
+
+export type SiteConnection = Connection & {
+  __typename?: 'SiteConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<SiteConnectionEdges>>>;
+};
 
 export type Post = Node & Document & {
   __typename?: 'Post';
@@ -196,13 +262,6 @@ export type Post = Node & Document & {
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
-};
-
-export type StringFilter = {
-  startsWith?: InputMaybe<Scalars['String']['input']>;
-  eq?: InputMaybe<Scalars['String']['input']>;
-  exists?: InputMaybe<Scalars['Boolean']['input']>;
-  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export type DatetimeFilter = {
@@ -299,6 +358,8 @@ export type Mutation = {
   deleteDocument: DocumentNode;
   createDocument: DocumentNode;
   createFolder: DocumentNode;
+  updateSite: Site;
+  createSite: Site;
   updatePost: Post;
   createPost: Post;
   updateAuthor: Author;
@@ -339,6 +400,18 @@ export type MutationCreateFolderArgs = {
 };
 
 
+export type MutationUpdateSiteArgs = {
+  relativePath: Scalars['String']['input'];
+  params: SiteMutation;
+};
+
+
+export type MutationCreateSiteArgs = {
+  relativePath: Scalars['String']['input'];
+  params: SiteMutation;
+};
+
+
 export type MutationUpdatePostArgs = {
   relativePath: Scalars['String']['input'];
   params: PostMutation;
@@ -363,14 +436,28 @@ export type MutationCreateAuthorArgs = {
 };
 
 export type DocumentUpdateMutation = {
+  site?: InputMaybe<SiteMutation>;
   post?: InputMaybe<PostMutation>;
   author?: InputMaybe<AuthorMutation>;
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type DocumentMutation = {
+  site?: InputMaybe<SiteMutation>;
   post?: InputMaybe<PostMutation>;
   author?: InputMaybe<AuthorMutation>;
+};
+
+export type SiteMutation = {
+  eyebrow?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  stackLabel?: InputMaybe<Scalars['String']['input']>;
+  stackValue?: InputMaybe<Scalars['String']['input']>;
+  hostLabel?: InputMaybe<Scalars['String']['input']>;
+  hostValue?: InputMaybe<Scalars['String']['input']>;
+  modeLabel?: InputMaybe<Scalars['String']['input']>;
+  modeValue?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type PostMutation = {
@@ -394,9 +481,30 @@ export type AuthorMutation = {
   body?: InputMaybe<Scalars['JSON']['input']>;
 };
 
+export type SitePartsFragment = { __typename: 'Site', eyebrow?: string | null, title?: string | null, description?: string | null, stackLabel?: string | null, stackValue?: string | null, hostLabel?: string | null, hostValue?: string | null, modeLabel?: string | null, modeValue?: string | null };
+
 export type PostPartsFragment = { __typename: 'Post', title: string, date: string, summary?: string | null, tags?: Array<string | null> | null, draft?: boolean | null, images?: Array<string | null> | null, layout?: string | null, body?: any | null };
 
 export type AuthorPartsFragment = { __typename: 'Author', name: string, avatar?: string | null, occupation?: string | null, company?: string | null, email?: string | null, github?: string | null, body?: any | null };
+
+export type SiteQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type SiteQuery = { __typename?: 'Query', site: { __typename: 'Site', id: string, eyebrow?: string | null, title?: string | null, description?: string | null, stackLabel?: string | null, stackValue?: string | null, hostLabel?: string | null, hostValue?: string | null, modeLabel?: string | null, modeValue?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+
+export type SiteConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<SiteFilter>;
+}>;
+
+
+export type SiteConnectionQuery = { __typename?: 'Query', siteConnection: { __typename?: 'SiteConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'SiteConnectionEdges', cursor: string, node?: { __typename: 'Site', id: string, eyebrow?: string | null, title?: string | null, description?: string | null, stackLabel?: string | null, stackValue?: string | null, hostLabel?: string | null, hostValue?: string | null, modeLabel?: string | null, modeValue?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type PostQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -436,6 +544,20 @@ export type AuthorConnectionQueryVariables = Exact<{
 
 export type AuthorConnectionQuery = { __typename?: 'Query', authorConnection: { __typename?: 'AuthorConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'AuthorConnectionEdges', cursor: string, node?: { __typename: 'Author', id: string, name: string, avatar?: string | null, occupation?: string | null, company?: string | null, email?: string | null, github?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
+export const SitePartsFragmentDoc = gql`
+    fragment SiteParts on Site {
+  __typename
+  eyebrow
+  title
+  description
+  stackLabel
+  stackValue
+  hostLabel
+  hostValue
+  modeLabel
+  modeValue
+}
+    `;
 export const PostPartsFragmentDoc = gql`
     fragment PostParts on Post {
   __typename
@@ -461,6 +583,63 @@ export const AuthorPartsFragmentDoc = gql`
   body
 }
     `;
+export const SiteDocument = gql`
+    query site($relativePath: String!) {
+  site(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...SiteParts
+  }
+}
+    ${SitePartsFragmentDoc}`;
+export const SiteConnectionDocument = gql`
+    query siteConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: SiteFilter) {
+  siteConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...SiteParts
+      }
+    }
+  }
+}
+    ${SitePartsFragmentDoc}`;
 export const PostDocument = gql`
     query post($relativePath: String!) {
   post(relativePath: $relativePath) {
@@ -578,7 +757,13 @@ export const AuthorConnectionDocument = gql`
 export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) => Promise<R>
   export function getSdk<C>(requester: Requester<C>) {
     return {
-      post(variables: PostQueryVariables, options?: C): Promise<{data: PostQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PostQueryVariables, query: string}> {
+      site(variables: SiteQueryVariables, options?: C): Promise<{data: SiteQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: SiteQueryVariables, query: string}> {
+        return requester<{data: SiteQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: SiteQueryVariables, query: string}, SiteQueryVariables>(SiteDocument, variables, options);
+      },
+    siteConnection(variables?: SiteConnectionQueryVariables, options?: C): Promise<{data: SiteConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: SiteConnectionQueryVariables, query: string}> {
+        return requester<{data: SiteConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: SiteConnectionQueryVariables, query: string}, SiteConnectionQueryVariables>(SiteConnectionDocument, variables, options);
+      },
+    post(variables: PostQueryVariables, options?: C): Promise<{data: PostQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PostQueryVariables, query: string}> {
         return requester<{data: PostQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PostQueryVariables, query: string}, PostQueryVariables>(PostDocument, variables, options);
       },
     postConnection(variables?: PostConnectionQueryVariables, options?: C): Promise<{data: PostConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PostConnectionQueryVariables, query: string}> {

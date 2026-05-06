@@ -23,6 +23,28 @@ export default defineConfig({
   schema: {
     collections: [
       {
+        name: 'site',
+        label: 'Site Settings',
+        path: 'data/site',
+        format: 'json',
+        fields: [
+          { type: 'string', name: 'eyebrow', label: 'Eyebrow' },
+          { type: 'string', name: 'title', label: 'Homepage Title' },
+          {
+            type: 'string',
+            name: 'description',
+            label: 'Homepage Description',
+            ui: { component: 'textarea' },
+          },
+          { type: 'string', name: 'stackLabel', label: 'Stack Label' },
+          { type: 'string', name: 'stackValue', label: 'Stack Value' },
+          { type: 'string', name: 'hostLabel', label: 'Host Label' },
+          { type: 'string', name: 'hostValue', label: 'Host Value' },
+          { type: 'string', name: 'modeLabel', label: 'Mode Label' },
+          { type: 'string', name: 'modeValue', label: 'Mode Value' },
+        ],
+      },
+      {
         name: 'post',
         label: 'Blog Posts',
         path: 'data/blog',

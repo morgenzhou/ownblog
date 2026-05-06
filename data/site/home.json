@@ -1,0 +1,11 @@
+{
+  "eyebrow": "morgenzhou.com",
+  "title": "Notes for building with sharper tools.",
+  "description": "A modern notebook on AI, products, mobility, and web systems. Written in MDX, deployed on Cloudflare, kept close to the code.",
+  "stackLabel": "stack",
+  "stackValue": "Next.js / Tailwind / MDX",
+  "hostLabel": "host",
+  "hostValue": "Cloudflare Pages",
+  "modeLabel": "mode",
+  "modeValue": "write, ship, learn"
+}
