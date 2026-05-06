@@ -1,6 +1,6 @@
 # Morgen Zhou Blog
 
-Astro blog for `morgenzhou.com`.
+Next.js + Tailwind CSS blog for `morgenzhou.com`, based on the Tailwind Nextjs Starter Blog structure.
 
 ## Local Development
 
@@ -9,30 +9,17 @@ npm install
 npm run dev
 ```
 
+## Writing
+
+Blog posts live in `data/blog` as MDX files.
+
 ## Cloudflare Pages
 
-Use these settings when creating the Pages project:
+Use these settings:
 
-- Framework preset: Astro
+- Framework preset: `Next.js` or `None`
 - Build command: `npm run build`
 - Build output directory: `dist`
-- Root directory: `morgenzhou-blog` if deploying from the parent repository
+- Root directory: leave blank
 
-After Cloudflare shows the domain as Active, add these custom domains in Pages:
-
-- `morgenzhou.com`
-- `www.morgenzhou.com`
-
-Blog posts live in `src/content/posts`.
-
-## Built-in Admin
-
-The site includes a private editor at `/admin`.
-
-Cloudflare Pages needs these runtime settings:
-
-- D1 binding: `DB`
-- Secret: `ADMIN_PASSWORD`
-- Secret: `ADMIN_SESSION_SECRET`
-
-Create the D1 schema with `migrations/0001_posts.sql`.
+The build script exports the Next.js site statically and copies `out` to `dist` for the existing Cloudflare Pages setup.
