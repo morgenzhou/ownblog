@@ -1,0 +1,65 @@
+media:
+  input: public/uploads
+  output: /uploads
+
+content:
+  - name: posts
+    label: Blog posts
+    type: collection
+    path: src/content/posts
+    format: yaml-frontmatter
+    filename:
+      template: "{year}-{month}-{day}-{title}.md"
+      field: create
+    view:
+      primary: title
+      sort: pubDate
+      order: desc
+      fields: [title, pubDate, draft]
+    fields:
+      - name: title
+        label: Title
+        type: string
+      - name: description
+        label: Description
+        type: text
+        options:
+          maxlength: 180
+      - name: pubDate
+        label: Publish date
+        type: date
+        options:
+          format: yyyy-MM-dd
+      - name: updatedDate
+        label: Updated date
+        type: date
+        required: false
+        default: ""
+        options:
+          format: yyyy-MM-dd
+      - name: heroImage
+        label: Cover image
+        type: image
+        required: false
+        options:
+          path: public/uploads/blog
+          extensions: [jpg, jpeg, png, webp]
+          rename: true
+      - name: tags
+        label: Tags
+        type: string
+        list: true
+        required: false
+      - name: draft
+        label: Draft
+        type: boolean
+        default: false
+      - name: body
+        label: Body
+        type: rich-text
+        options:
+          format: markdown
+          media: true
+          path: public/uploads/blog
+          rename: true
+          switcher: true
