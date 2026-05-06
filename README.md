@@ -25,13 +25,14 @@ After Cloudflare shows the domain as Active, add these custom domains in Pages:
 
 Blog posts live in `src/content/posts`.
 
-## Online Editor
+## Built-in Admin
 
-This repository is configured for Pages CMS.
+The site includes a private editor at `/admin`.
 
-1. Open https://app.pagescms.org
-2. Sign in with GitHub.
-3. Install or authorize Pages CMS for `morgenzhou/ownblog`.
-4. Open the repository and edit `Blog posts`.
+Cloudflare Pages needs these runtime settings:
 
-Saving a post commits to GitHub, then Cloudflare Pages deploys the site automatically.
+- D1 binding: `DB`
+- Secret: `ADMIN_PASSWORD`
+- Secret: `ADMIN_SESSION_SECRET`
+
+Create the D1 schema with `migrations/0001_posts.sql`.
