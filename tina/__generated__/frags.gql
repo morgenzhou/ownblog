@@ -1,0 +1,22 @@
+fragment PostParts on Post {
+  __typename
+  title
+  date
+  summary
+  tags
+  draft
+  images
+  layout
+  body
+}
+
+fragment AuthorParts on Author {
+  __typename
+  name
+  avatar
+  occupation
+  company
+  email
+  github
+  body
+}

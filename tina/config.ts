@@ -41,12 +41,6 @@ export default defineConfig({
             },
           },
         },
-        defaultItem: () => ({
-          date: new Date().toISOString(),
-          draft: false,
-          layout: 'PostSimple',
-          tags: ['notes'],
-        }),
         fields: [
           {
             type: 'string',

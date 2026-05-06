@@ -23,7 +23,6 @@ public/sitemap.xml
 /dist
 .astro
 /public/admin
-/tina/__generated__
 *.xml
 
 # rss feed
