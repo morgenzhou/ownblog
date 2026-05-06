@@ -22,6 +22,8 @@ public/sitemap.xml
 /build
 /dist
 .astro
+/public/admin
+/tina/__generated__
 *.xml
 
 # rss feed

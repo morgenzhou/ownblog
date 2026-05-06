@@ -11,7 +11,21 @@ npm run dev
 
 ## Writing
 
-Blog posts live in `data/blog` as MDX files.
+Blog posts live in `data/blog` as MDX files. TinaCMS is available at `/admin/index.html`.
+
+For local editing:
+
+```bash
+npm run dev
+```
+
+Then open `http://localhost:3000/admin/index.html`.
+
+For production editing, create a TinaCloud project for `morgenzhou/ownblog`, then add these Cloudflare Pages environment variables:
+
+- `NEXT_PUBLIC_TINA_CLIENT_ID`
+- `TINA_TOKEN`
+- `NEXT_PUBLIC_TINA_BRANCH=main`
 
 ## Cloudflare Pages
 
