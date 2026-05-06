@@ -1,0 +1,36 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const posts = (await getCollection("posts"))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<BaseLayout title="Blog" description="All writing from Morgen Zhou.">
+  <section class="container article-header">
+    <p class="eyebrow">Archive</p>
+    <h1>Blog</h1>
+    <p class="lede">A home for essays, decisions, notes, and experiments.</p>
+  </section>
+
+  <section class="section">
+    <div class="container post-grid">
+      {posts.map((post) => (
+        <article class="post-card">
+          {post.data.heroImage && <img src={post.data.heroImage} alt="" loading="lazy" />}
+          <div class="post-card-body">
+            <time datetime={post.data.pubDate.toISOString()}>
+              {post.data.pubDate.toLocaleDateString("en", { month: "short", day: "numeric", year: "numeric" })}
+            </time>
+            <h3><a href={`/blog/${post.slug}/`}>{post.data.title}</a></h3>
+            <p>{post.data.description}</p>
+            <div class="tag-row">
+              {post.data.tags.map((tag) => <span class="tag">{tag}</span>)}
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

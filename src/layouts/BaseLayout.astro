@@ -1,0 +1,52 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Morgen Zhou",
+  description = "Notes on building, movement, cities, and useful technology.",
+} = Astro.props;
+
+const pageTitle = title === "Morgen Zhou" ? title : `${title} | Morgen Zhou`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url} />
+    <link rel="alternate" type="application/rss+xml" title="Morgen Zhou RSS" href="/rss.xml" />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="site-header">
+        <nav class="nav" aria-label="Main navigation">
+          <a class="brand" href="/">Morgen Zhou</a>
+          <div class="nav-links">
+            <a href="/blog/">Blog</a>
+            <a href="/about/">About</a>
+            <a href="/rss.xml">RSS</a>
+          </div>
+        </nav>
+      </header>
+      <main>
+        <slot />
+      </main>
+      <footer class="footer">
+        <div class="container">
+          <span>© {new Date().getFullYear()} Morgen Zhou. Published from morgenzhou.com.</span>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
