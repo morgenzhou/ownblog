@@ -3,8 +3,8 @@ const siteMetadata = {
   title: 'Morgen Zhou',
   author: 'Morgen Zhou',
   headerTitle: 'Morgen Zhou',
-  description: 'Notes on AI, building, mobility, and the internet.',
-  language: 'en-us',
+  description: '记录 AI、产品、移动出行与网络系统的思考。',
+  language: 'zh-cn',
   theme: 'system', // system, dark or light
   siteUrl: 'https://morgenzhou.com',
   siteRepo: 'https://github.com/morgenzhou/ownblog',
@@ -22,7 +22,7 @@ const siteMetadata = {
   instagram: '',
   medium: '',
   bluesky: '',
-  locale: 'en-US',
+  locale: 'zh-CN',
   // set to true if you want a navbar fixed to the top
   stickyNav: false,
   analytics: {

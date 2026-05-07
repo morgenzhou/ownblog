@@ -11,64 +11,70 @@ export default function Home({ posts }) {
   return (
     <>
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
-        <section className="pt-8 pb-10 md:pt-12">
-          <div className="relative overflow-hidden rounded-lg border border-slate-800 bg-slate-950 px-6 py-10 shadow-2xl shadow-slate-200/60 md:px-10 md:py-14 dark:shadow-black/20">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,0.32),transparent_30%),radial-gradient(circle_at_80%_15%,rgba(168,85,247,0.34),transparent_28%),linear-gradient(135deg,rgba(15,23,42,0.98),rgba(30,41,59,0.94)_48%,rgba(88,28,135,0.82))]" />
-            <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.055)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.055)_1px,transparent_1px)] bg-[size:42px_42px] opacity-35" />
-            <div className="relative grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
-              <div className="space-y-6">
-                <p className="font-mono text-sm font-semibold text-cyan-200">{home.eyebrow}</p>
-                <h1 className="max-w-4xl text-4xl leading-tight font-extrabold text-white sm:text-5xl md:text-6xl">
+        <section className="pt-3 pb-6 md:pt-5 md:pb-8">
+          <div className="relative overflow-hidden rounded-lg border border-slate-200 bg-slate-50 px-5 py-7 shadow-sm md:px-8 md:py-9 dark:border-slate-800 dark:bg-slate-950">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_16%,rgba(34,211,238,0.22),transparent_32%),radial-gradient(circle_at_82%_12%,rgba(124,58,237,0.2),transparent_30%),linear-gradient(135deg,rgba(248,250,252,0.98),rgba(239,246,255,0.92)_48%,rgba(245,243,255,0.9))] dark:bg-[radial-gradient(circle_at_18%_16%,rgba(56,189,248,0.22),transparent_32%),radial-gradient(circle_at_82%_12%,rgba(124,58,237,0.24),transparent_30%),linear-gradient(135deg,rgba(15,23,42,0.98),rgba(30,41,59,0.96)_50%,rgba(46,16,101,0.78))]" />
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(15,23,42,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(15,23,42,0.045)_1px,transparent_1px)] bg-[size:40px_40px] opacity-60 dark:bg-[linear-gradient(rgba(255,255,255,0.055)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.055)_1px,transparent_1px)] dark:opacity-35" />
+            <div className="relative grid gap-7 lg:grid-cols-[1.08fr_0.92fr] lg:items-center">
+              <div className="space-y-4">
+                <p className="font-mono text-xs font-semibold tracking-wide text-cyan-700 uppercase dark:text-cyan-200">
+                  {home.eyebrow}
+                </p>
+                <h1 className="max-w-3xl text-3xl leading-tight font-extrabold text-slate-950 sm:text-4xl md:text-5xl dark:text-white">
                   {home.title}
                 </h1>
-                <p className="max-w-3xl text-lg leading-8 text-slate-200">{home.description}</p>
-                <div className="flex flex-wrap gap-3 pt-2">
+                <p className="max-w-3xl text-base leading-7 text-slate-700 md:text-lg dark:text-slate-200">
+                  {home.description}
+                </p>
+                <div className="flex flex-wrap gap-3 pt-1">
                   <Link
                     href="/blog"
-                    className="rounded-md bg-cyan-300 px-5 py-3 text-sm font-bold text-slate-950 transition hover:bg-white"
+                    className="rounded-md bg-slate-950 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-cyan-700 dark:bg-cyan-300 dark:text-slate-950 dark:hover:bg-white"
                   >
                     阅读最新心得
                   </Link>
                   <Link
                     href="/tags"
-                    className="rounded-md border border-white/25 px-5 py-3 text-sm font-bold text-white transition hover:border-cyan-200 hover:text-cyan-100"
+                    className="rounded-md border border-slate-300 bg-white/40 px-4 py-2.5 text-sm font-bold text-slate-800 transition hover:border-cyan-500 hover:text-cyan-700 dark:border-white/20 dark:bg-white/5 dark:text-white dark:hover:border-cyan-200 dark:hover:text-cyan-100"
                   >
                     分类探索
                   </Link>
                 </div>
               </div>
-              <div className="relative min-h-72 overflow-hidden rounded-lg border border-white/10 bg-white/5 p-5 font-mono text-sm text-slate-200 backdrop-blur">
-                <div className="absolute inset-x-8 top-10 h-40 rounded-full bg-cyan-300/20 blur-3xl" />
-                <div className="relative mb-5 flex gap-2">
-                  <span className="h-3 w-3 rounded-full bg-cyan-300" />
-                  <span className="h-3 w-3 rounded-full bg-violet-300" />
-                  <span className="h-3 w-3 rounded-full bg-slate-200" />
+              <div className="relative hidden overflow-hidden rounded-lg border border-slate-200/80 bg-white/65 p-5 font-mono text-sm text-slate-700 shadow-sm backdrop-blur lg:block dark:border-white/10 dark:bg-white/5 dark:text-slate-200">
+                <div className="absolute inset-x-8 top-8 h-32 rounded-full bg-cyan-300/20 blur-3xl" />
+                <div className="relative mb-4 flex gap-2">
+                  <span className="h-2.5 w-2.5 rounded-full bg-cyan-400" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-violet-400" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-slate-400" />
                 </div>
-                <div className="relative space-y-4">
+                <div className="relative space-y-3">
                   <div>
-                    <p className="text-slate-400">{home.stackLabel}</p>
+                    <p className="text-slate-500 dark:text-slate-400">{home.stackLabel}</p>
                     <p>{home.stackValue}</p>
                   </div>
                   <div>
-                    <p className="text-slate-400">{home.hostLabel}</p>
+                    <p className="text-slate-500 dark:text-slate-400">{home.hostLabel}</p>
                     <p>{home.hostValue}</p>
                   </div>
                   <div>
-                    <p className="text-slate-400">{home.modeLabel}</p>
+                    <p className="text-slate-500 dark:text-slate-400">{home.modeLabel}</p>
                     <p>{home.modeValue}</p>
                   </div>
-                  <div className="pt-4 text-cyan-200">
+                  <div className="pt-2 text-cyan-700 dark:text-cyan-200">
                     <p>{'>'} co-create --with ai</p>
-                    <p className="mt-2 text-slate-300">status: exploring new possibilities</p>
+                    <p className="mt-1 text-slate-500 dark:text-slate-300">
+                      status: exploring new possibilities
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </section>
-        <div className="space-y-2 pt-8 pb-4 md:space-y-5">
+        <div className="space-y-2 pt-6 pb-3 md:space-y-3">
           <h2 className="text-2xl leading-8 font-bold text-gray-900 sm:text-3xl dark:text-gray-100">
-            Latest writing
+            最新文章
           </h2>
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
             {siteMetadata.description}
